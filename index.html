@@ -8,185 +8,200 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#f0f4ff;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:#05070a;color:#f0f4ff;overflow-x:hidden}
 
-/* ── FONT OVERRIDE FOR HEADINGS ── */
+/* ── FONT OVERRIDE ── */
 h1, .sec-title, .proj-card h3, .expertise-title, .report-header {
     font-family: 'Copperplate Gothic Bold', 'Copperplate Gothic', serif !important;
 }
 
-/* ── BACKGROUND ── */
-.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,#0a0e1a 0%,#0f1729 40%,#0a0e1a 100%);pointer-events:none}
-.orb1{position:fixed;top:-10%;left:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.22) 0%,transparent 70%);filter:blur(60px);animation:drift 12s ease-in-out infinite alternate;pointer-events:none}
-.orb2{position:fixed;bottom:-10%;right:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.16) 0%,transparent 70%);filter:blur(80px);animation:drift 16s ease-in-out infinite alternate-reverse;pointer-events:none}
-.orb3{position:fixed;top:40%;left:40%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 70%);filter:blur(60px);animation:drift 10s ease-in-out infinite alternate;pointer-events:none}
-@keyframes drift{from{transform:translate(0,0)}to{transform:translate(30px,20px)}}
-.grid-lines{position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.035) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+/* ── BADASS ENGINEERING BACKGROUND ── */
+.bg{
+    position:fixed;inset:0;z-index:0;
+    background: radial-gradient(circle at 50% 50%, #0d1424 0%, #05070a 100%);
+    pointer-events:none;
+}
+
+/* The Topology Mesh Effect */
+.topo-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: 
+        linear-gradient(rgba(99,102,241,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.05) 1px, transparent 1px),
+        radial-gradient(circle at 2px 2px, rgba(99,102,241,0.15) 1px, transparent 0);
+    background-size: 100px 100px, 100px 100px, 50px 50px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    pointer-events: none;
+}
+
+/* Laser Scanline Animation */
+.scanline {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(to right, transparent, #6366f1, transparent);
+    opacity: 0.2;
+    z-index: 1;
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+}
+@keyframes scan {
+    0% { top: -10%; }
+    100% { top: 110%; }
+}
+
+.orb {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%; 
+    filter: blur(120px); z-index: 0; opacity: 0.15; pointer-events: none;
+}
+.orb-1 { top: -10%; left: -10%; background: #4f46e5; }
+.orb-2 { bottom: -10%; right: -10%; background: #0ea5e9; }
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,14,26,0.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06)}
-.nav-logo{font-size:13px;font-weight:700;letter-spacing:1px;color:#e0e7ff}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,7,10,0.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-logo{font-size:14px;font-weight:800;letter-spacing:2px;color:#fff; text-transform:uppercase}
 .nav-links{display:flex;gap:24px}
-.nav-links a{font-size:12px;font-weight:500;color:#64748b;text-decoration:none;transition:.2s;letter-spacing:.5px}
-.nav-links a:hover{color:#a5b4fc}
-.cv-btn{padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:8px;cursor:pointer;transition:.2s}
-.cv-btn:hover{background:rgba(99,102,241,0.28);border-color:rgba(129,140,248,0.5)}
+.nav-links a{font-size:12px;font-weight:500;color:#94a3b8;text-decoration:none;transition:.3s;text-transform:uppercase;letter-spacing:1px}
+.nav-links a:hover{color:#fff; text-shadow: 0 0 10px #6366f1}
+.cv-btn{padding:8px 20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:transparent;color:#fff;border:1px solid #6366f1;border-radius:4px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.cv-btn:hover{background:#6366f1; box-shadow: 0 0 20px rgba(99,102,241,0.4)}
 
 /* ── LAYOUT ── */
-.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 28px}
+.wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 28px}
 
 /* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:56px}
-.hero-inner{width:100%;padding:60px 0 40px}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#818cf8;border:1px solid rgba(129,140,248,0.3);border-radius:999px;padding:5px 14px;margin-bottom:22px;background:rgba(99,102,241,0.08)}
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:60px}
+.hero-inner{width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#818cf8;border:1px solid rgba(129,140,248,0.3);border-radius:4px;padding:5px 12px;margin-bottom:22px;background:rgba(99,102,241,0.05)}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#818cf8;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:62px;font-weight:800;line-height:1.05;letter-spacing:-2px;background:linear-gradient(135deg,#ffffff 20%,#a5b4fc 60%,#67e8f9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
-.hero-role{font-size:16px;font-weight:500;color:#818cf8;margin-bottom:14px;letter-spacing:.3px}
-.hero-sub{font-size:15px;color:#64748b;line-height:1.75;max-width:600px;margin-bottom:32px}
-.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
-.hero-chip{padding:5px 12px;font-size:11px;font-weight:600;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#94a3b8}
-.contact-row{display:flex;gap:10px;flex-wrap:wrap}
-.contact-chip{display:flex;align-items:center;gap:6px;padding:8px 16px;font-size:12px;font-weight:600;color:#c7d2fe;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.22);border-radius:999px;cursor:pointer;transition:.2s;user-select:none}
-.contact-chip:hover{background:rgba(99,102,241,0.22);border-color:rgba(129,140,248,0.5);transform:translateY(-2px)}
+.hero h1{font-size:72px;font-weight:800;line-height:1;letter-spacing:-2px;color:#fff;margin-bottom:20px; text-shadow: 0 10px 30px rgba(0,0,0,0.5)}
+.hero-role{font-size:18px;font-weight:600;color:#818cf8;margin-bottom:15px;letter-spacing:1px; text-transform: uppercase}
+.hero-sub{font-size:16px;color:#64748b;line-height:1.7;max-width:650px;margin-bottom:35px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:35px}
+.hero-chip{padding:6px 14px;font-size:11px;font-weight:600;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#94a3b8}
+.contact-row{display:flex;gap:12px;flex-wrap:wrap}
+.contact-chip{display:flex;align-items:center;gap:8px;padding:10px 20px;font-size:12px;font-weight:600;color:#fff;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:4px;cursor:pointer;transition:.3s}
+.contact-chip:hover{background:rgba(99,102,241,0.2); transform:translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3)}
 
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.3),rgba(14,165,233,0.2),transparent);margin:4px 0}
+/* ── GLASS ELEMENTS ── */
+.glass{background:rgba(13,17,36,0.6);border:1px solid rgba(255,255,255,0.05);border-radius:12px;backdrop-filter:blur(20px);transition:.4s; position: relative}
+.glass:hover{border-color:rgba(99,102,241,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6)}
+.glass-body{padding:32px}
 
-/* ── SECTIONS ── */
-.section{padding:72px 0 0}
-.sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#818cf8;margin-bottom:6px}
-.sec-title{font-size:26px;font-weight:800;color:#e0e7ff;margin-bottom:28px;letter-spacing:-.5px}
+.section{padding:80px 0 0}
+.sec-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#818cf8;margin-bottom:10px}
+.sec-title{font-size:32px;font-weight:800;color:#fff;margin-bottom:30px}
 
-/* ── GLASS CARD ── */
-.glass{background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.07);border-radius:18px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:.3s}
-.glass::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent)}
-.glass:hover{border-color:rgba(129,140,248,0.22);box-shadow:0 20px 40px rgba(0,0,0,0.25)}
-.glass-body{padding:28px 32px}
-
-/* ── ABOUT ── */
-.about-text{font-size:15px;color:#94a3b8;line-height:1.85}
-.about-text strong{color:#c7d2fe;font-weight:600}
-.about-list{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-.about-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#94a3b8;padding:10px 14px;background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.12);border-radius:10px}
-.about-item span{font-size:16px;margin-top:1px}
-
-/* ── SERVICES ── */
-.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.svc-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:24px 22px;transition:.3s;position:relative;overflow:hidden}
-.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,0.05),transparent);opacity:0;transition:.3s}
-.svc-card:hover{border-color:rgba(129,140,248,0.25);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
-.svc-card:hover::before{opacity:1}
-.svc-icon{font-size:26px;margin-bottom:12px}
-.svc-card h3{font-size:14px;font-weight:700;color:#e0e7ff;margin-bottom:10px}
-.svc-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.svc-list li{font-size:12px;color:#64748b;display:flex;align-items:center;gap:7px}
-.svc-list li::before{content:'';width:4px;height:4px;border-radius:50%;background:#818cf8;flex-shrink:0}
-
-/* ── TOOLKIT ── */
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag{padding:7px 15px;font-size:12px;font-weight:600;border-radius:999px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:#a5b4fc;transition:.2s;cursor:default}
-.tag:hover{background:rgba(99,102,241,0.2);border-color:rgba(129,140,248,0.4);color:#c7d2fe;transform:translateY(-1px)}
+/* ── IMAGE DEPTH & REFLECTION ── */
+.img-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    background: #000;
+    cursor: zoom-in;
+}
+.proj-img, .gallery-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), filter 0.3s;
+    filter: brightness(0.8) contrast(1.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+/* Specular Reflection Layer */
+.img-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+    transition: .3s;
+}
+.proj-card:hover .proj-img {
+    transform: scale(1.05);
+    filter: brightness(1);
+}
+.proj-card:hover .img-container::after {
+    background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+}
 
 /* ── PROJECT CARDS ── */
-.proj-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:18px;overflow:hidden;cursor:pointer;transition:.3s;position:relative;margin-bottom:16px}
-.proj-card:hover{border-color:rgba(129,140,248,0.28);transform:translateY(-5px);box-shadow:0 28px 56px rgba(0,0,0,0.35)}
-
-.proj-img{width:100%;height:250px;object-fit:cover;display:block;filter:brightness(.8);cursor:zoom-in;transition: .3s}
-.proj-img:hover{filter: brightness(1.1)}
-
-.proj-body{padding:24px 26px 20px}
-.proj-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.proj-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#818cf8;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:999px;padding:3px 12px}
-.proj-arrow{font-size:16px;color:#4b5563;transition:.3s}
-.proj-card:hover .proj-arrow{color:#818cf8;transform:translate(3px,-3px)}
-.proj-card h3{font-size:17px;font-weight:800;color:#e0e7ff;margin-bottom:4px;letter-spacing:-.3px}
-.proj-subtitle{font-size:12px;color:#64748b;margin-bottom:14px;font-style:italic}
-.proj-desc{font-size:13px;color:#94a3b8;line-height:1.7;margin-bottom:16px}
-.proj-outcomes{display:flex;flex-direction:column;gap:6px}
-.proj-outcome{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#7dd3fc;background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.12);border-radius:8px;padding:8px 12px}
-.proj-outcome::before{content:'✓';font-weight:700;flex-shrink:0}
-.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.proj-tag{font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#64748b}
-.proj-expand{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:12px;font-weight:600;color:#818cf8;padding:10px;border:1px solid rgba(99,102,241,0.15);border-radius:10px;transition:.2s}
-.proj-expand:hover{background:rgba(99,102,241,0.08)}
-.proj-detail{display:none;padding:0 26px 24px}
+.proj-card{background:rgba(13,17,36,0.4);border:1px solid rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;transition:.4s;margin-bottom:24px; position: relative}
+.proj-card:hover{border-color:rgba(99,102,241,0.5); transform:translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.7)}
+.proj-body{padding:28px}
+.proj-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.proj-badge{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#818cf8;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:4px;padding:4px 10px}
+.proj-card h3{font-size:20px;color:#fff;margin-bottom:6px}
+.proj-subtitle{font-size:13px;color:#64748b;margin-bottom:15px;font-style:italic}
+.proj-desc{font-size:14px;color:#94a3b8;line-height:1.6;margin-bottom:20px}
+.proj-outcomes{display:flex;flex-direction:column;gap:8px}
+.proj-outcome{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#7dd3fc;background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.1);border-radius:6px;padding:10px 14px}
+.proj-outcome::before{content:'✓';font-weight:800;color:#0ea5e9}
+.proj-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.proj-tag{font-size:11px;font-weight:600;padding:5px 12px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#64748b}
+.proj-expand{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:24px;font-size:12px;font-weight:700;color:#818cf8;padding:12px;border:1px solid rgba(99,102,241,0.2);border-radius:8px;cursor:pointer;transition:.3s}
+.proj-expand:hover{background:rgba(99,102,241,0.1); border-color:#818cf8}
+.proj-detail{display:none;padding:0 28px 28px}
 .proj-detail.open{display:block}
 
-/* ── GALLERY SYSTEM ── */
+/* ── GALLERY ── */
 .tech-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
 }
 .gallery-item {
-    background: rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
     border-radius: 8px;
     overflow: hidden;
     transition: .3s;
     cursor: zoom-in;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 .gallery-item:hover {
-    border-color: #818cf8;
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    border-color: #6366f1;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
 }
 .gallery-item img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    display: block;
+    width: 100%; height: 160px; object-fit: cover; display: block; transition: .3s; filter: brightness(0.8);
 }
+.gallery-item:hover img { filter: brightness(1); transform: scale(1.05); }
 .gallery-item span {
-    display: block;
-    font-size: 10px;
-    color: #64748b;
-    padding: 6px;
-    text-align: center;
-    background: rgba(0,0,0,0.3);
+    display: block; font-size: 10px; color: #94a3b8; padding: 8px; text-align: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
 }
 
-/* ── REPORT STYLE ── */
-.report-section{margin-bottom:24px; border-left:2px solid rgba(129,140,248,0.3); padding-left:16px}
+/* ── REPORTS ── */
+.report-section{margin-bottom:24px; border-left:3px solid #4f46e5; padding-left:20px}
 .report-header{font-size:14px; color:#818cf8; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px}
-.report-text{font-size:13px; color:#94a3b8; line-height:1.6; margin-bottom:12px}
-.report-list{list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
-.report-list li{font-size:13px; color:#94a3b8; display:flex; align-items:flex-start; gap:8px}
+.report-text{font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:12px}
+.report-list{list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:12px}
+.report-list li{font-size:14px; color:#94a3b8; display:flex; align-items:flex-start; gap:10px}
 .report-list li::before{content:'→'; color:#818cf8; font-weight:bold}
-
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
-.detail-block{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:16px}
-.detail-block h4{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#818cf8;margin-bottom:10px}
-.detail-block ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-.detail-block li{font-size:12px;color:#94a3b8;display:flex;align-items:flex-start;gap:8px}
-.detail-block li::before{content:'•';color:#818cf8;flex-shrink:0}
+.detail-block{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:16px}
+.detail-block h4{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#818cf8;margin-bottom:12px}
 
 /* ── LIGHTBOX ── */
 #lightbox {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 1000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    cursor: zoom-out;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); z-index: 1000;
+    display: none; justify-content: center; align-items: center; cursor: zoom-out;
+    backdrop-filter: blur(10px);
 }
-#lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    border: 2px solid rgba(255,255,255,0.1);
-}
+#lightbox img { max-width: 90%; max-height: 90%; box-shadow: 0 0 50px rgba(0,0,0,1); border: 1px solid rgba(255,255,255,0.1); }
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1e1b4b;color:#c7d2fe;border:1px solid rgba(99,102,241,0.3);padding:9px 22px;border-radius:999px;font-size:12px;font-weight:600;z-index:999;opacity:0;transition:.3s;pointer-events:none}
+/* ── UTILS ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1e1b4b;color:#c7d2fe;border:1px solid rgba(99,102,241,0.3);padding:10px 24px;border-radius:4px;font-size:12px;font-weight:600;z-index:999;opacity:0;transition:.3s;pointer-events:none}
 .toast.show{opacity:1}
 
-/* ── RESPONSIVE ── */
 @media(max-width:700px){
-  .hero h1{font-size:38px}
-  .services-grid{grid-template-columns:1fr}
+  .hero h1{font-size:42px}
   .detail-grid{grid-template-columns:1fr}
   nav .nav-links{display:none}
 }
@@ -195,8 +210,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 <body>
 
 <div class="bg"></div>
-<div class="orb1"></div><div class="orb2"></div><div class="orb3"></div>
-<div class="grid-lines"></div>
+<div class="topo-mesh"></div>
+<div class="scanline"></div>
+<div class="orb orb-1"></div><div class="orb orb-2"></div>
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeImage()">
@@ -205,7 +221,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">HM</div>
+  <div class="nav-logo">HM // Structural Integrity</div>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -223,14 +239,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
       <div class="hero-badge">📍 UK-Based · Available for work</div>
       <h1>Harshvardhan<br>Mahalle</h1>
       <div class="hero-role">Mechanical / Structural Integrity Engineer</div>
-      <p class="hero-sub">Specialising in FEA, Pressure Systems, Fitness-for-Service (API 579), and Code-based Design for high-temperature, high-pressure industrial equipment.</p>
+      <p class="hero-sub">High-fidelity FEA, Pressure Systems Analysis, and Fitness-for-Service (API 579) evaluations for high-criticality industrial infrastructure.</p>
       <div class="hero-chips">
         <div class="hero-chip">Finite Element Analysis</div>
         <div class="hero-chip">Pressure Systems</div>
         <div class="hero-chip">API 579 FFS</div>
         <div class="hero-chip">Fracture Mechanics</div>
-        <div class="hero-chip">ASME / BS 7910</div>
-        <div class="hero-chip">Structural Integrity</div>
+        <div class="hero-chip">ASME Section I / VIII</div>
       </div>
       <div class="contact-row" id="contact">
         <div class="contact-chip" onclick="copyText('harshvardhanmahalle75@gmail.com')">✉ Email</div>
@@ -240,22 +255,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
     </div>
   </div>
 
-  <div class="divider"></div>
-
   <!-- ── ABOUT ── -->
   <div class="section" id="about">
-    <div class="sec-eyebrow">Background</div>
+    <div class="sec-eyebrow">Technical Profile</div>
     <div class="sec-title">About Me</div>
     <div class="glass">
       <div class="glass-body">
-        <p class="about-text">I am a <strong>Mechanical / Structural Integrity Engineer</strong> specialising in pressure systems, finite element analysis, and structural integrity assessment for high-temperature and high-pressure industrial equipment. My experience spans <strong>power generation systems, pressure vessels, valves, and piping components</strong> where I support engineering decisions through simulation-based analysis, code compliance checks, and failure risk evaluation.</p>
-        <div class="about-list">
-          <div class="about-item"><span>🔍</span>Independent technical assessments</div>
-          <div class="about-item"><span>✅</span>Design validation and verification</div>
-          <div class="about-item"><span>📊</span>Fitness-for-service analysis</div>
-          <div class="about-item"><span>⚙️</span>FEA-based structural evaluation</div>
-          <div class="about-item"><span>📄</span>Engineering reports for compliance</div>
-          <div class="about-item"><span>🔧</span>Decision support engineering</div>
+        <p class="report-text" style="font-size:16px">I am a <strong>Structural Integrity Engineer</strong> specialising in the lifecycle assessment of high-temperature and high-pressure systems. My core expertise lies in bridging the gap between <strong>simulation-based analysis (FEA)</strong> and <strong>industrial code compliance</strong> (ASME, API, BS). I help industrial operators justify the safe continued operation of aging assets through rigorous fracture mechanics and creep-fatigue evaluation.</p>
+        <div class="about-list" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:15px; margin-top:25px">
+          <div class="about-item" style="padding:15px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:#94a3b8"><span>🔍</span>Independent Technical Assessments</div>
+          <div class="about-item" style="padding:15px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:#94a3b8"><span>✅</span>Design Validation & Verification</div>
+          <div class="about-item" style="padding:15px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:#94a3b8"><span>📊</span>API 579 Fitness-for-Service</div>
+          <div class="about-item" style="padding:15px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:#94a3b8"><span>⚙️</span>Complex FEA Simulation</div>
         </div>
       </div>
     </div>
@@ -263,80 +274,58 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
   <!-- ── SERVICES ── -->
   <div class="section" id="services">
-    <div class="sec-eyebrow">What I Do</div>
-    <div class="sec-title">Services Offered</div>
-    <div class="services-grid">
-      <div class="svc-card">
-        <div class="svc-icon">⚙️</div>
-        <h3>Engineering Analysis</h3>
-        <ul class="svc-list">
-          <li>FEA simulations (stress, thermal, fatigue)</li>
-          <li>Structural integrity assessment</li>
-          <li>Load case evaluation</li>
+    <div class="sec-eyebrow">Capability</div>
+    <div class="sec-title">Core Services</div>
+    <div class="services-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:20px">
+      <div class="glass" style="padding:25px">
+        <div class="svc-icon" style="font-size:24px; margin-bottom:15px">⚙️</div>
+        <h3>Structural Analysis</h3>
+        <ul class="report-list" style="margin-top:10px">
+          <li>Transient Thermal & Pressure FEA</li>
+          <li>Elastic-Plastic Stress Analysis</li>
+          <li>Fatigue Life Prediction</li>
         </ul>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">📘</div>
-        <h3>Code & Compliance Work</h3>
-        <ul class="svc-list">
-          <li>ASME Section I / VIII design checks</li>
-          <li>API 579 Fitness-for-Service (Level 1–3)</li>
-          <li>BS 7910 fracture mechanics</li>
+      <div class="glass" style="padding:25px">
+        <div class="svc-icon" style="font-size:24px; margin-bottom:15px">📘</div>
+        <h3>Code Compliance</h3>
+        <ul class="report-list" style="margin-top:10px">
+          <li>ASME Section I & VIII Design</li>
+          <li>API 579 Level 1, 2, 3 FFS</li>
+          <li>BS 7910 Crack Assessment</li>
         </ul>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">🧪</div>
-        <h3>Failure & Life Assessment</h3>
-        <ul class="svc-list">
-          <li>Crack growth prediction</li>
-          <li>Creep and fatigue analysis</li>
-          <li>Remaining life estimation</li>
+      <div class="glass" style="padding:25px">
+        <div class="svc-icon" style="font-size:24px; margin-bottom:15px">🧪</div>
+        <h3>Damage Evaluation</h3>
+        <ul class="report-list" style="margin-top:10px">
+          <li>High-Temperature Creep Modeling</li>
+          <li>Crack Growth Rate Prediction</li>
+          <li>Remaining Life Estimation</li>
         </ul>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">📄</div>
-        <h3>Engineering Deliverables</h3>
-        <ul class="svc-list">
-          <li>Technical reports for clients</li>
-          <li>Design justification notes</li>
-          <li>Calculation packages for approval</li>
+      <div class="glass" style="padding:25px">
+        <div class="svc-icon" style="font-size:24px; margin-bottom:15px">📄</div>
+        <h3>Technical Deliverables</h3>
+        <ul class="report-list" style="margin-top:10px">
+          <li>Design Justification Notes</li>
+          <li>Regulatory Approval Packages</li>
+          <li>Risk-Based Inspection (RBI) Maps</li>
         </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TOOLKIT ── -->
-  <div class="section">
-    <div class="sec-eyebrow">Toolkit</div>
-    <div class="sec-title">Software & Standards</div>
-    <div class="glass">
-      <div class="glass-body">
-        <div class="tags">
-          <div class="tag">ANSYS</div>
-          <div class="tag">SolidWorks</div>
-          <div class="tag">AutoCAD</div>
-          <div class="tag">API 579</div>
-          <div class="tag">BS 7910</div>
-          <div class="tag">ASME Section I</div>
-          <div class="tag">ASME Section VIII</div>
-          <div class="tag">FEA</div>
-          <div class="tag">Fracture Mechanics</div>
-          <div class="tag">Creep Analysis</div>
-          <div class="tag">Fatigue Assessment</div>
-          <div class="tag">NDT Interpretation</div>
-        </div>
       </div>
     </div>
   </div>
 
   <!-- ── PROJECTS ── -->
   <div class="section" id="projects" style="padding-bottom:40px">
-    <div class="sec-eyebrow">Work</div>
+    <div class="sec-eyebrow">Work Portfolio</div>
     <div class="sec-title">Case Studies</div>
 
     <!-- PROJECT 1: Steam Valve FFS -->
     <div class="proj-card">
-      <img src="three_d_modelled_with_the_excavation.jpg" class="proj-img" alt="Steam Turbine Valve FFS" onclick="openImage(this.src)">
+      <div class="img-container" onclick="openImage('three_d_modelled_with_the_excavation.jpg')">
+        <img src="three_d_modelled_with_the_excavation.jpg" class="proj-img" alt="Steam Turbine Valve FFS">
+      </div>
       <div class="proj-body">
         <div class="proj-meta">
           <span class="proj-badge">Fitness-for-Service</span>
@@ -344,18 +333,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         </div>
         <h3>Steam Turbine Valve FFS & Crack Growth Analysis</h3>
         <div class="proj-subtitle">API 579 + BS 7910 Fracture Mechanics Assessment</div>
-        <p class="proj-desc">Assessed a cracked valve body following excavation during outage. Combined 3D laser scan-to-CAD reconstruction with API 579 Level 3 analysis and BS 7910 crack growth prediction.</p>
+        <p class="proj-desc">Analysis of a cracked valve body. Integrated 3D laser scan data with Level 3 API 579 analysis to predict flaw evolution and safe operating intervals.</p>
         <div class="proj-outcomes">
-          <div class="proj-outcome">Crack initiation predicted between 325–1425 cycles</div>
-          <div class="proj-outcome">Inspection interval and repair strategy defined</div>
-          <div class="proj-outcome">High-risk geometric stress regions identified</div>
+          <div class="proj-outcome">Predicted crack initiation between 325–1425 cycles</div>
+          <div class="proj-outcome">Defined inspection interval and repair strategy</div>
+          <div class="proj-outcome">Mapped high-risk geometric stress regions</div>
         </div>
         <div class="proj-tags">
-          <span class="proj-tag">API 579 Level 3</span>
-          <span class="proj-tag">BS 7910</span>
-          <span class="proj-tag">Fracture Mechanics</span>
-          <span class="proj-tag">Crack Growth</span>
-          <span class="proj-tag">3D Laser Scan</span>
+          <span class="proj-tag">API 579</span> <span class="proj-tag">BS 7910</span> <span class="proj-tag">3D Laser Scan</span>
         </div>
       </div>
       <div class="proj-expand" onclick="toggleDetail('d4',this)">▾ View Full Technical Analysis</div>
@@ -377,15 +362,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
               <li>3D laser scan to CAD reconstruction</li>
               <li>API 579 Level 3 FFS analysis</li>
               <li>Crack growth prediction using BS 7910</li>
-              <li>Flaw characterisation and fatigue crack growth rate calculations</li>
             </ul>
           </div>
           <div class="detail-block">
             <h4>Key Outcome</h4>
             <ul>
-              <li>Crack initiation predicted at 325–1425 cycles</li>
-              <li>Defined inspection interval and repair strategy</li>
-              <li>High-risk geometric stress regions identified</li>
+              <li> defined critical repair timeline</li>
+              <li>high-risk stress zones identified</li>
             </ul>
           </div>
         </div>
@@ -394,7 +377,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
     <!-- PROJECT 2: HRSG Unit 3 -->
     <div class="proj-card">
-      <img src="hrsg_creep_fatigue_results.jpg" class="proj-img" alt="HRSG Unit 3" onclick="openImage(this.src)">
+      <div class="img-container" onclick="openImage('hrsg_creep_fatigue_results.jpg')">
+        <img src="hrsg_creep_fatigue_results.jpg" class="proj-img" alt="HRSG Unit 3">
+      </div>
       <div class="proj-body">
         <div class="proj-meta">
           <span class="proj-badge">FEA Analysis</span>
@@ -402,17 +387,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         </div>
         <h3>Creep & Fatigue Assessment of HRSG Unit 3</h3>
         <div class="proj-subtitle">Immingham Power Station – Life Assessment to 2047</div>
-        <p class="proj-desc">Detailed structural integrity evaluation using FEA to simulate real operating conditions and determine suitability for continued operation until 2047.</p>
+        <p class="proj-desc">Simulated real operating conditions via FEA to evaluate structural suitability for continued service over the next 20+ years.</p>
         <div class="proj-outcomes">
-          <div class="proj-outcome">Critical damage hotspots identified via FEA simulations</div>
-          <div class="proj-outcome">Life-limiting components mapped and quantified</div>
-          <div class="proj-outcome">Risk-based inspection strategy implemented for critical zones</div>
+          <div class="proj-outcome">Mapped life-limiting components via FEA usage factors</div>
+          <div class="proj-outcome">Established basis for 2047 life extension</div>
         </div>
         <div class="proj-tags">
-          <span class="proj-tag">ANSYS FEA</span>
-          <span class="proj-tag">Life Assessment</span>
-          <span class="proj-tag">Creep & Fatigue</span>
-          <span class="proj-tag">Immingham PS</span>
+          <span class="proj-tag">ANSYS FEA</span> <span class="proj-tag">Immingham PS</span> <span class="proj-tag">Life Assessment</span>
         </div>
       </div>
       <div class="proj-expand" onclick="toggleDetail('d2',this)">▾ View Detailed Report</div>
@@ -423,62 +404,43 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="three_d_model.jpg"><span>3D Model</span></div>
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="global_three_d_model.jpg"><span>Global Layout Model</span></div>
         </div>
-        
         <div class="report-section">
             <div class="report-header">Project Overview</div>
-            <p class="report-text">A detailed creep and fatigue assessment was performed for HRSG Unit 3 at Immingham Power Station to evaluate long-term structural integrity. The study simulated real operating conditions, including thermal and pressure loading over steady and cyclic scenarios.</p>
+            <p class="report-text">A detailed creep and fatigue assessment for HRSG Unit 3 at Immingham Power Station. Simulating thermal and pressure loading over steady and cyclic scenarios using FEA.</p>
         </div>
-
         <div class="report-section">
             <div class="report-header">Scope of Work</div>
-            <p class="report-text">Reconstructed 3D CAD models from OEM drawings for critical pressure components:</p>
+            <p class="report-text">Reconstructed CAD for:</p>
             <ul class="report-list">
                 <li><strong>HP Superheater 1:</strong> 7 headers + 1 manifold</li>
                 <li><strong>HP Superheater 2:</strong> 3 headers + 2 manifolds</li>
                 <li><strong>Attemperator:</strong> 1 Unit</li>
             </ul>
         </div>
-
-        <div class="report-section">
-            <div class="report-header">Methodology</div>
-            <div class="detail-grid">
-                <div class="detail-block">
-                    <h4>Creep Analysis</h4>
-                    <p class="report-text" style="font-size:12px">Evaluated based on steady-state temperature and internal pressure loading.</p>
-                </div>
-                <div class="detail-block">
-                    <h4>Fatigue Analysis</h4>
-                    <p class="report-text" style="font-size:12px">Based on pressure cycles combined with transient thermal effects (start-up conditions).</p>
-                </div>
-            </div>
-        </div>
-
         <div class="report-section">
             <div class="report-header">Key Findings</div>
             <div class="detail-grid">
                 <div class="detail-block">
                     <h4>Creep Hotspots</h4>
                     <ul class="report-list" style="font-size:12px">
-                        <li>UH1 (HP SH 2): 17.87% projected usage</li>
-                        <li>LH3 (HP SH 1): 16.49% projected usage</li>
+                        <li>UH1 (HP SH 2): 17.87% usage</li>
+                        <li>LH3 (HP SH 1): 16.49% usage</li>
                     </ul>
                 </div>
                 <div class="detail-block">
                     <h4>Fatigue Critical</h4>
                     <ul class="report-list" style="font-size:12px">
-                        <li>UH1 (HP SH 1): 18.03% projected usage</li>
+                        <li>UH1 (HP SH 1): 18.03% usage</li>
                     </ul>
                 </div>
             </div>
         </div>
-
         <div class="report-section">
             <div class="report-header">Recommendations & Value</div>
             <ul class="report-list">
-                <li>Install instrumentation on key headers to monitor real thermal transients</li>
-                <li>Focus targeted NDT inspections on nozzle connections and branch intersections</li>
-                <li>Established life-limiting components through 2047</li>
-                <li>Supported risk-based maintenance planning</li>
+                <li>Implement real-time thermal instrumentation on key headers</li>
+                <li>Target NDT at nozzle and branch intersections</li>
+                <li>Reduced uncertainty for operation through 2047</li>
             </ul>
         </div>
       </div>
@@ -486,7 +448,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
     <!-- PROJECT 3: HHP Header Valve -->
     <div class="proj-card">
-      <img src="bypass_connection_picture.jpg" class="proj-img" alt="HHP Header Valve" onclick="openImage(this.src)">
+      <div class="img-container" onclick="openImage('bypass_connection_picture.jpg')">
+        <img src="bypass_connection_picture.jpg" class="proj-img" alt="HHP Header Valve">
+      </div>
       <div class="proj-body">
         <div class="proj-meta">
           <span class="proj-badge">Pressure Systems</span>
@@ -494,17 +458,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         </div>
         <h3>HHP Header Valve Bypass Connection Design</h3>
         <div class="proj-subtitle">ASME Section I Compliance · VPI Immingham</div>
-        <p class="proj-desc">Redesign of a High High Pressure (HHP) header valve bypass to replace non-compliant socket welds with full-penetration welded connections.</p>
+        <p class="proj-desc">Redesigned bypass connection to eliminate non-compliant socket welds, ensuring long-term fatigue resistance in high-pressure steam service.</p>
         <div class="proj-outcomes">
-          <div class="proj-outcome">Eliminated socket weld fatigue risk in high-pressure service</div>
-          <div class="proj-outcome">Verified ASME Section I compliance across multiple sensitivity cases</div>
-          <div class="proj-outcome">Delivered full fabrication drawing for manufacture</div>
+          <div class="proj-outcome">Achieved ASME Section I validation across all load cases</div>
+          <div class="proj-outcome">Reduced weld count for higher inspection reliability</div>
         </div>
         <div class="proj-tags">
-          <span class="proj-tag">ASME Section I</span>
-          <span class="proj-tag">Mechanical Design</span>
-          <span class="proj-tag">VPI Immingham</span>
-          <span class="proj-tag">Pressure Components</span>
+          <span class="proj-tag">ASME Section I</span> <span class="proj-tag">P91 Steel</span> <span class="proj-tag">VPI Immingham</span>
         </div>
       </div>
       <div class="proj-expand" onclick="toggleDetail('d3',this)">▾ View Detailed Report</div>
@@ -512,50 +472,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         <div class="tech-gallery">
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="bypass_connection_picture.jpg"><span>Replacement Design</span></div>
         </div>
-        
         <div class="report-section">
             <div class="report-header">Problem Statement</div>
-            <p class="report-text">A non-compliant socket weld connection was identified on a newly supplied valve. Socket welds are prohibited in high-pressure steam service at this site due to high fatigue cracking risk and limited inspection capabilities.</p>
+            <p class="report-text">Replacement of a socket weld fitting—prohibited in high-pressure steam service—with a full penetration welded set-on connection.</p>
         </div>
-
         <div class="report-section">
-            <div class="report-header">Design & Analysis Approach</div>
-            <p class="report-text">Three design sensitivity cases were evaluated to validate robustness using ASME Section I requirements:</p>
+            <div class="report-header">Design Approach</div>
+            <p class="report-text">Three sensitivity cases evaluated for robustness:</p>
             <ul class="report-list">
-                <li><strong>Case 1 (Baseline):</strong> Based on real geometry assumptions.</li>
-                <li><strong>Case 2 (Material):</strong> P91 equivalent material representation.</li>
-                <li><strong>Case 3 (Geometry):</strong> Reduced thickness bounding case.</li>
+                <li><strong>Case 1 (Baseline):</strong> Real geometry assumptions.</li>
+                <li><strong>Case 2 (Material):</strong> P91 material representation.</li>
+                <li><strong>Case 3 (Geometry):</strong> Bounding reduced thickness case.</li>
             </ul>
         </div>
-
         <div class="report-section">
-            <div class="report-header">Key Results & Decisions</div>
+            <div class="report-header">Key Results</div>
             <div class="detail-grid">
                 <div class="detail-block">
                     <h4>Usage Ratios</h4>
                     <ul class="report-list" style="font-size:12px">
-                        <li>Main Body: ~31% – 39% (Acceptable)</li>
-                        <li>Nozzle: ~39% – 68% (Acceptable)</li>
+                        <li>Main Body: 31% – 39% (Safe)</li>
+                        <li>Nozzle: 39% – 68% (Safe)</li>
                     </ul>
                 </div>
                 <div class="detail-block">
                     <h4>Justification</h4>
                     <ul class="report-list" style="font-size:12px">
-                        <li>Selected Full Penetration Weld to stop fatigue</li>
-                        <li>Forged/Machined single component for reliability</li>
-                        <li>P91/F91 material compatibility confirmed</li>
+                        <li>Full penetration weld for fatigue resistance</li>
+                        <li>P91/F91 metallurgical compatibility</li>
                     </ul>
                 </div>
             </div>
         </div>
-
         <div class="report-section">
             <div class="report-header">Value Delivered</div>
             <ul class="report-list">
-                <li>Delivered fully ASME-compliant high-pressure design</li>
-                <li>Improved fatigue resistance and reduced inspection burden</li>
-                <li>Reduced weld count to improve overall reliability</li>
-                <li>Enabled safe installation without altering the valve body</li>
+                <li>Eliminated socket weld failure risk</li>
+                <li>Full compliance with VPI site engineering standards</li>
+                <li>Reduced inspection burden</li>
             </ul>
         </div>
       </div>
@@ -563,7 +517,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
     <!-- PROJECT 4: RLA Ras Laffan -->
     <div class="proj-card">
-      <img src="plant_schematics.jpg" class="proj-img" alt="RLA Ras Laffan" onclick="openImage(this.src)">
+      <div class="img-container" onclick="openImage('plant_schematics.jpg')">
+        <img src="plant_schematics.jpg" class="proj-img" alt="RLA Ras Laffan">
+      </div>
       <div class="proj-body">
         <div class="proj-meta">
           <span class="proj-badge">Remanent Life Assessment</span>
@@ -571,17 +527,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         </div>
         <h3>RLA of HRSG Unit 13 – Ras Laffan Power Station</h3>
         <div class="proj-subtitle">Creep & Fatigue Integrity Evaluation · Qatar Power</div>
-        <p class="proj-desc">Comprehensive integrity evaluation of HRSG Unit 13 to assess long-term pressure part degradation and provide a technical basis for life extension.</p>
+        <p class="proj-desc">Full integrity audit of HRSG Unit 13 to quantify pressure part degradation and justify safe operation extensions.</p>
         <div class="proj-outcomes">
-          <div class="proj-outcome">Established verifiable remaining life for unit extension</div>
-          <div class="proj-outcome">Identified HP Superheater-1 headers as critical creep zones</div>
-          <div class="proj-outcome">Defined risk-based inspection (RBI) monitoring strategy</div>
+          <div class="proj-outcome">All components verified within code damage limits</div>
+          <div class="proj-outcome">HP Superheater-1 identified as critical creep zone</div>
+          <div class="proj-outcome">Defined RBI monitoring strategy for extension</div>
         </div>
         <div class="proj-tags">
-          <span class="proj-tag">API 579</span>
-          <span class="proj-tag">Creep Analysis</span>
-          <span class="proj-tag">Qatar Power</span>
-          <span class="proj-tag">Life Extension</span>
+          <span class="proj-tag">API 579</span> <span class="proj-tag">Creep/Fatigue</span> <span class="proj-tag">Qatar Power</span>
         </div>
       </div>
       <div class="proj-expand" onclick="toggleDetail('d1',this)">▾ View Detailed Report</div>
@@ -589,53 +542,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
         <div class="tech-gallery">
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="plant_schematics.jpg"><span>Plant Schematics</span></div>
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="rla_ras_laffan_minimum_thickness_calculation_of_components.jpg"><span>Thickness Calcs</span></div>
-            <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="rla_ras_laffan_minimum_thickness_calculation_example.jpg"><span>Calculation Example</span></div>
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="rla_ras_laffan_creep_results.jpg"><span>Creep Results</span></div>
             <div class="gallery-item" onclick="openImage(this.querySelector('img').src)"><img src="rla_ras_laffan_fatigue_results.jpg"><span>Fatigue Results</span></div>
         </div>
-
         <div class="report-section">
             <div class="report-header">Objective</div>
-            <p class="report-text">Evaluate remaining life by quantifying creep damage (high-temp), fatigue (cyclic loading), and wall thinning (corrosion/erosion) to ensure compliance with code limits.</p>
+            <p class="report-text">Quantify creep, fatigue, and corrosion-induced wall thinning to determine remaining operational life according to API 579 standards.</p>
         </div>
-
         <div class="report-section">
-            <div class="report-header">Scope of Work</div>
-            <ul class="report-list">
-                <li>Integration of multi-source inspection data for condition review</li>
-                <li>Analytical RLA for all critical pressure parts</li>
-                <li>Thickness verification using UT (Ultrasonic Testing) data</li>
-                <li>Mapping of high-risk structural hotspots</li>
-            </ul>
-        </div>
-
-        <div class="report-section">
-            <div class="report-header">Key Findings</div>
+            <div class="report-header">Assessment Methodology</div>
             <div class="detail-grid">
                 <div class="detail-block">
-                    <h4>Hotspots</h4>
-                    <ul class="report-list" style="font-size:12px">
-                        <li><strong>Max Creep:</strong> HP Superheater-1 lower harp headers</li>
-                        <li><strong>Max Fatigue:</strong> HP Drum nozzle connections</li>
-                    </ul>
+                    <h4>Creep & Fatigue</h4>
+                    <p class="report-text" style="font-size:12px">Long-term stress modeling based on OEM and site operation data.</p>
                 </div>
                 <div class="detail-block">
-                    <h4>Observation</h4>
-                    <ul class="report-list" style="font-size:12px">
-                        <li>Damage concentrated in high-temp superheater zones</li>
-                        <li>Wall thickness verified via UT data integration</li>
-                    </ul>
+                    <h4>Wall Loss</h4>
+                    <p class="report-text" style="font-size:12px">Integration of UT thickness data into structural calculations.</p>
                 </div>
             </div>
         </div>
-
+        <div class="report-section">
+            <div class="report-header">Key Findings</div>
+            <ul class="report-list">
+                <li><strong>Creep:</strong> HP Superheater-1 lower harp headers are the limiting components.</li>
+                <li><strong>Fatigue:</strong> HP Drum nozzle connections exhibit high cyclic load markers.</li>
+            </ul>
+        </div>
         <div class="report-section">
             <div class="report-header">Value Delivered</div>
             <ul class="report-list">
-                <li>Provided engineering basis for safe life extension</li>
-                <li>Defined targeted NDT and metallurgical replication strategy</li>
-                <li>Reduced risk of unplanned outages</li>
-                <li>Enabled long-term lifecycle planning for Qatar Power</li>
+                <li>Engineering basis for safe plant life extension</li>
+                <li>Established targeted metallurgical replication plan</li>
+                <li>Minimized unplanned downtime via RBI mapping</li>
             </ul>
         </div>
       </div>
@@ -645,30 +584,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 
   <!-- ── ADDITIONAL EXPERTISE ── -->
   <div class="section" id="expertise" style="padding-bottom:80px">
-    <div class="sec-eyebrow">Beyond Case Studies</div>
+    <div class="sec-eyebrow">Capability Extensions</div>
     <div class="sec-title expertise-title">Additional Expertise</div>
     <div class="glass">
         <div class="glass-body">
-            <h4 style="font-size:14px; color:#818cf8; margin-bottom:20px; letter-spacing:1px; text-transform:uppercase">Other High-Impact Projects</h4>
-            <div class="about-list">
-                <div class="about-item">
+            <h4 style="font-size:14px; color:#818cf8; margin-bottom:20px; letter-spacing:1px; text-transform:uppercase">High-Impact Industrial Projects</h4>
+            <div class="about-list" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:15px">
+                <div class="about-item" style="padding:20px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px">
                     <span>🚀</span>
                     <div>
-                        <strong style="display:block; font-size:14px; margin-bottom:4px">Drax Explosion Dynamic Analysis</strong>
+                        <strong style="display:block; font-size:14px; color:#fff; margin-bottom:4px">Drax Explosion Dynamic Analysis</strong>
                         <p style="font-size:12px; color:#94a3b8">Advanced transient structural response & blast loading evaluation.</p>
                     </div>
                 </div>
-                <div class="about-item">
+                <div class="about-item" style="padding:20px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px">
                     <span>⚓</span>
                     <div>
-                        <strong style="display:block; font-size:14px; margin-bottom:4px">Subsea 7 Rig Design and Analysis</strong>
+                        <strong style="display:block; font-size:14px; color:#fff; margin-bottom:4px">Subsea 7 Rig Design and Analysis</strong>
                         <p style="font-size:12px; color:#94a3b8">Offshore structural integrity & load-case verification.</p>
                     </div>
                 </div>
-                <div class="about-item">
+                <div class="about-item" style="padding:20px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:8px">
                     <span>🏭</span>
                     <div>
-                        <strong style="display:block; font-size:14px; margin-bottom:4px">Kings Lynn HRSG Casing Assessments</strong>
+                        <strong style="display:block; font-size:14px; color:#fff; margin-bottom:4px">Kings Lynn HRSG Casing Assessments</strong>
                         <p style="font-size:12px; color:#94a3b8">Thermal-mechanical stress analysis of casing structural components.</p>
                     </div>
                 </div>
@@ -682,7 +621,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 28px;height:56px;d
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
-// LIGHTBOX LOGIC
 function openImage(src){
     const lb = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
@@ -692,13 +630,10 @@ function openImage(src){
 function closeImage(){
     document.getElementById('lightbox').style.display = 'none';
 }
-
-// PROJECT LOGIC
 function toggleDetail(id, btn){
   const el = document.getElementById(id);
   const open = el.classList.toggle('open');
-  btn.textContent = open ? '▴ Hide Technical Report' : '▾ View Full Details';
-  if(!open) btn.textContent = '▾ View Full Technical Analysis';
+  btn.textContent = open ? '▴ Hide Technical Report' : '▾ View Full Technical Analysis';
 }
 function downloadCV(){
   const a = document.createElement('a');
